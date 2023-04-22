@@ -15,16 +15,16 @@ At a high level, it works like this;
 2. User logs in at the µService (auth request is proxied to auth-service to 
    retrieve and then create or update a local instance of the user)
 3. Try access µService endpoint;
-  1. µService checks with auth-service/auth/token/verify that this token is 
+   1. µService checks with auth-service/auth/token/verify that this token is 
      valid;
-  2. µService takes the JWT and decodes it to get the user_id (we can trust it 
+   2. µService takes the JWT and decodes it to get the user_id (we can trust it 
      because it was verified to be untampered with by `/token/verify/`);
-  3. Take the user_id and check for a local user object;
-    1. If exists, instatiates and use.
-    2. If not exists, requests `auth-service/auth/users/{user-id-from-jwt}/`
-      1. Creates a local user object from that one returned. (Details should be 
+   3. Take the user_id and check for a local user object;
+      1. If exists, instatiates and use.
+      2. If not exists, requests `auth-service/auth/users/{user-id-from-jwt}/`
+         1. Creates a local user object from that one returned. (Details should be 
          updated when authing the first time.)
-      2. Instatiates and uses.
+         2. Instatiates and uses.
 
 The caveat is that a users personal details in the client-service won't update 
 until they log out and back in again. Fields are also likely to be overwritten
@@ -37,7 +37,7 @@ auth-service to keep track of remote service permissions.
 
     
 
-# How to stand up the Auth-Service:
+# Standing up the Auth-Service:
 
 Enter the auth-service directory: `cd auth-service`
 
@@ -90,7 +90,7 @@ Leave this to idle away in it's own terminal window to one side for now. Next
 we'll start the client-service.
 
 
-# How to stand up the Client-Service
+# Standing up the Client-Service
 
 Set the API's authentication for DRF.
 
@@ -101,9 +101,10 @@ Enter the services directory `cd client-service` then migrate
 
 You should have a completely fresh database now with no users.
 
-Let's test.
+# Let's test.
 
-In the auth-service directory;
+This shoud still be running from earlier, however, in the auth-service
+directory;
 `python manage.py runserver 127.0.0.1 8000`
 
 in the client directory:
