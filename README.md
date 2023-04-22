@@ -37,7 +37,7 @@ auth-service to keep track of remote service permissions.
 
     
 
-# How to set up the Auth-Service:
+# How to stand up the Auth-Service:
 
 Enter the auth-service directory: `cd auth-service`
 
@@ -90,7 +90,7 @@ Leave this to idle away in it's own terminal window to one side for now. Next
 we'll start the client-service.
 
 
-# How to set up the Client-Service
+# How to stand up the Client-Service
 
 Set the API's authentication for DRF.
 
@@ -132,7 +132,7 @@ supported.
 
 ---
 
-# Test the API only.
+# How to test the API
 
 In the below examples we're mking requests to simple super simple API 
 (client-service) which will reach out to the auth-service to retrieve, verify,
@@ -148,7 +148,7 @@ auth-service directly. It shouldn't even be accessible to the public.
 
 Then follow the example requests below.
 
-## Authorise an obtain a token pair.
+## Authorise and obtain a token pair
 
 `curl \
   -X POST \
@@ -157,7 +157,8 @@ Then follow the example requests below.
   http://127.0.0.1:8001/auth/token/`
 
 
-## Generic API requst
+## Perform a generic API requst
+ Should return 'success'.
 
 `curl \
   -H "Authorization: Bearer ${ACCESS_TOKEN}" \
@@ -173,7 +174,7 @@ Then follow the example requests below.
   http://127.0.0.1:8001/auth/token/refresh/`
 
 
-## Verify the token is correct.
+## Verify the token is correct
  Performed by the client-service with every single JWT API request.
 
 `curl \
@@ -183,7 +184,7 @@ Then follow the example requests below.
   http://127.0.0.1:8001/auth/token/verify/`
 
 
-## Get the user details.
+## Get the user details
  This would be done inside the Auth handler when the user doesn't exist.
 
 `curl \
