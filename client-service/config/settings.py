@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'drf_remotejwt',
-    "custom_user.apps.CustomUserConfig",
+    'remotejwt',
+    "remotejwt_user",
 ]
 
 MIDDLEWARE = [
@@ -83,7 +83,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "custom_user.User"
+AUTH_USER_MODEL = "remotejwt_user.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -106,8 +106,8 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "drf_remotejwt.authentication.RemoteJWTAuthentication",     # Use our service
-        "rest_framework.authentication.SessionAuthentication",                      # Maybe they logged in with a session. Allows a view to work in a browser.
+        "remotejwt.authentication.RemoteJWTAuthentication",     # Use our service
+        "rest_framework.authentication.SessionAuthentication",      # Maybe they logged in with a session. Allows a view to work in a browser.
         # "users.authentication.TokenHMACAuthentication",
     ),
 }
@@ -127,7 +127,7 @@ REMOTE_JWT = {
 # implement out or custom backend for Admin and other views.
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',    # Default, check the local DB.
-    'drf_remotejwt.authentication.ModelBackend'
+    'remotejwt.authentication.ModelBackend'
 ]
 
 

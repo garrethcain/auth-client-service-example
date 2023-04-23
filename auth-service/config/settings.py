@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
-    "custom_user",
+    "remotejwt",
+    'remotejwt_user',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +88,8 @@ DATABASES = {
 }
 
 
-AUTH_USER_MODEL = "custom_user.User"
+# AUTH_USER_MODEL = "custom_user.User"
+AUTH_USER_MODEL = "remotejwt_user.User"
 
 
 # Password validation

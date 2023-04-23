@@ -20,5 +20,5 @@ from test_app.views import TestView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/test/', TestView.as_view()),
-    path('auth/', include("drf_remotejwt.urls"))
+    path('auth/', include("remotejwt.urls"))
 ]

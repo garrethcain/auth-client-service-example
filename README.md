@@ -2,7 +2,7 @@
 # What is this?
 
 This is a stand alone example of a client-service and auth-service that uses the
-[drf_remotejwt](https://github.com/garrethcain/drf_remotejwt) package to 
+[drf_remotejwt](https://github.com/garrethcain/drf-remotejwt) package to 
 authenticate a user logging into a client-service against a remote auth-service.
 This is most useful in a microservice type set up.
 Most useful if you're building a microservice ecosystem and want all services
@@ -101,6 +101,7 @@ Enter the services directory `cd client-service` then migrate
 
 You should have a completely fresh database now with no users.
 
+
 # Let's test.
 
 This shoud still be running from earlier, however, in the auth-service
@@ -133,7 +134,7 @@ supported.
 
 ---
 
-# How to test the API
+## How to test the API
 
 In the below examples we're mking requests to simple super simple API 
 (client-service) which will reach out to the auth-service to retrieve, verify,
@@ -159,6 +160,12 @@ Then follow the example requests below.
 
 
 ## Perform a generic API requst
+ 
+ Export the access token from the previous request, 
+ 
+ eg.
+ `export ACCESS_TOKEN={paste_token_here}`
+ 
  Should return 'success'.
 
 `curl \
