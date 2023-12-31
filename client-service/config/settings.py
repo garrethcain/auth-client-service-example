@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1ya(*x=^ry)59g*)()=su8i*vpz#$mvu^y8-=0dj^dm07_b$#^'
+SECRET_KEY = "django-insecure-1ya(*x=^ry)59g*)()=su8i*vpz#$mvu^y8-=0dj^dm07_b$#^"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,55 +31,55 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'remotejwt',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "remotejwt_client",
     "remotejwt_user",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -90,54 +90,53 @@ AUTH_USER_MODEL = "remotejwt_user.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "remotejwt.authentication.RemoteJWTAuthentication",     # Use our service
-        "rest_framework.authentication.SessionAuthentication",      # Maybe they logged in with a session. Allows a view to work in a browser.
+        "remotejwt_client.authentication.RemoteJWTAuthentication",  # Use our service
+        "rest_framework.authentication.SessionAuthentication",  # Maybe they logged in with a session. Allows a view to work in a browser.
         # "users.authentication.TokenHMACAuthentication",
     ),
 }
 
 REMOTE_JWT = {
     "AUTH_HEADER_TYPE": "Bearer",
-    "AUTH_HEADER_NAME": "Authorization", # I think this config is broken in this ver of the Simple-JWT lib.
-    "REMOTE_AUTH_SERVICE_URL": "http://127.0.0.1:8000", # Were do we reach the Auth-Service
-    "REMOTE_AUTH_SERVICE_TOKEN_PATH": "/auth/token/", # The path to login and retrieve a token
-    "REMOTE_AUTH_SERVICE_REFRESH_PATH": "/auth/token/refresh/", # The path to refresh a token
-    "REMOTE_AUTH_SERVICE_VERIFY_PATH": "/auth/token/verify/", # The path to verify a token
-    "REMOTE_AUTH_SERVICE_USER_PATH": "/auth/users/{user_id}/", # the path to get the user object from the remote auth service
+    "AUTH_HEADER_NAME": "Authorization",  # I think this config is broken in this ver of the Simple-JWT lib.
+    "REMOTE_AUTH_SERVICE_URL": "http://127.0.0.1:8001",  # Were do we reach the Auth-Service
+    "REMOTE_AUTH_SERVICE_TOKEN_PATH": "/auth/token/",  # The path to login and retrieve a token
+    "REMOTE_AUTH_SERVICE_REFRESH_PATH": "/auth/token/refresh/",  # The path to refresh a token
+    "REMOTE_AUTH_SERVICE_VERIFY_PATH": "/auth/token/verify/",  # The path to verify a token
+    "REMOTE_AUTH_SERVICE_USER_PATH": "/auth/users/{user_id}/",  # the path to get the user object from the remote auth service
     "USER_ID_FIELD": "id",
-    "USER_ID_CLAIM": "user_id",    
+    "USER_ID_CLAIM": "user_id",
 }
 
 # implement out or custom backend for Admin and other views.
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',    # Default, check the local DB.
-    'remotejwt.authentication.ModelBackend'
+    "django.contrib.auth.backends.ModelBackend",  # Default, check the local DB.
+    "remotejwt_client.authentication.ModelBackend",
 ]
-
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -147,9 +146,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 from test_app.views import TestView
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/test/', TestView.as_view()),
-    path('auth/', include("remotejwt.urls"))
+    path("admin/", admin.site.urls),
+    path("api/test/", TestView.as_view()),
+    path("auth/", include("remotejwt_client.urls")),
 ]
