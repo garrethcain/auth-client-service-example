@@ -66,13 +66,15 @@ class CustomUserModelSerializer(serializers.ModelSerializer):
         objects manually.
         """
 
-        user_id = validated_data.pop(USERNAME_FIELD)
+        username_field_value = validated_data.pop(USERNAME_FIELD)
         customuserfield = validated_data.pop("customuserfield")
-        user, _ = User.objects.get_or_create(email=user_id, defaults=validated_data)
+        search_string = {USERNAME_FIELD: username_field_value}
+
+        user, _ = User.objects.get_or_create(**search_string, defaults=validated_data)
         # Delete stale customuserfield data.
         # It's stale because this payload is the latest truth.
         user.customuserfield.delete()
-
+        # now create any extra data we need in this service.
         serializer = CustomUserFieldSerializer(data=customuserfield)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=user)
