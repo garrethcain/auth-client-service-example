@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    # "rest_framework_simplejwt",
     "remotejwt_auth",
     "remotejwt_user",
+    "custom",
 ]
 
 MIDDLEWARE = [
@@ -130,19 +130,20 @@ REMOTE_JWT = {
     "ISSUER": None,
     "JWK_URL": None,
     "LEEWAY": 0,
-    "AUTH_HEADER_TYPE": "Bearer",
+    # "AUTH_HEADER_TYPE": ("Bearer",),
     # 'AUTH_HEADER_TYPES': ('Bearer',),
     # 'AUTH_HEADER_NAME': 'Jwt-Authorization', # don't uncomment, it breaks the authentication with the backend.
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
-    "USER_AUTHENTICATION_RULE": "remotejwt.authentication.default_user_authentication_rule",
-    "AUTH_TOKEN_CLASSES": ("remotejwt.tokens.AccessToken",),
+    "USER_AUTHENTICATION_RULE": "remotejwt_auth.authentication.default_user_authentication_rule",
+    "AUTH_TOKEN_CLASSES": ("remotejwt_auth.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
-    "TOKEN_USER_CLASS": "remotejwt.models.TokenUser",
+    "TOKEN_USER_CLASS": "remotejwt_user.models.TokenUser",
     "JTI_CLAIM": "jti",
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    "TOKEN_OBTAIN_SERIALIZER": "custom.serializers.CustomTokenObtainPairSerializer",
 }
 
 
