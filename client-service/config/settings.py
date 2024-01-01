@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "remotejwt_client",
     "remotejwt_user",
+    "custom",
 ]
 
 MIDDLEWARE = [
@@ -106,9 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "remotejwt_client.authentication.RemoteJWTAuthentication",  # Use our service
+        "remotejwt_client.authentication.RemoteJWTAuthentication",  # Use remote JWT service
         "rest_framework.authentication.SessionAuthentication",  # Maybe they logged in with a session. Allows a view to work in a browser.
-        # "users.authentication.TokenHMACAuthentication",
     ),
 }
 
@@ -122,6 +122,7 @@ REMOTE_JWT = {
     "REMOTE_AUTH_SERVICE_USER_PATH": "/auth/users/{user_id}/",  # the path to get the user object from the remote auth service
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
+    "USER_MODEL_SERIALIZER": "custom.serializers.CustomUserModelSerializer",
 }
 
 # implement out or custom backend for Admin and other views.

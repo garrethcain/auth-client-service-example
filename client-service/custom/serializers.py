@@ -7,6 +7,8 @@ from .models import CustomUserField
 
 User = get_user_model()
 
+USERNAME_FIELD = User.USERNAME_FIELD
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
@@ -57,3 +59,22 @@ class CustomUserModelSerializer(serializers.ModelSerializer):
             "customuserfield",
         )
         read_only_fields = ("date_joined", "last_login", "is_staff", "is_superuser")
+
+    def create(self, validated_data):
+        """
+        DRF doesn't support nested serializers so we need to create the nested
+        objects manually.
+        """
+
+        user_id = validated_data.pop(USERNAME_FIELD)
+        customuserfield = validated_data.pop("customuserfield")
+        user, _ = User.objects.get_or_create(email=user_id, defaults=validated_data)
+        # Delete stale customuserfield data.
+        # It's stale because this payload is the latest truth.
+        user.customuserfield.delete()
+
+        serializer = CustomUserFieldSerializer(data=customuserfield)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=user)
+
+        return user
