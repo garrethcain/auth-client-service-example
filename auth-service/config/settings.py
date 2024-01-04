@@ -124,14 +124,13 @@ REMOTE_JWT = {
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
     "ALGORITHM": "HS256",
-    "SIGNING_KEY": "d577273ff885c3f84dadb8578bb41399",  # must be a envar.
+    "SIGNING_KEY": "d577273ff885c3f84dadb8578bb41399",  # TODO: make this an envar.
     "VERIFYING_KEY": None,
     "AUDIENCE": None,
     "ISSUER": None,
     "JWK_URL": None,
     "LEEWAY": 0,
-    # "AUTH_HEADER_TYPE": ("Bearer",),
-    # 'AUTH_HEADER_TYPES': ('Bearer',),
+    "AUTH_HEADER_TYPES": ("Bearer",),
     # 'AUTH_HEADER_NAME': 'Jwt-Authorization', # don't uncomment, it breaks the authentication with the backend.
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
