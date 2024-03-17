@@ -2,7 +2,7 @@
 # What is this?
 
 This is a stand alone example of a client-service and auth-service that uses the
-[drf_remotejwt](https://github.com/garrethcain/drf-remotejwt) package to 
+[django-easyjwt](https://github.com/garrethcain/django-easyjwt) package to 
 authenticate a user logging into a client-service against a remote auth-service.
 This is most useful in a microservice type set up.
 Most useful if you're building a microservice ecosystem and want all services
