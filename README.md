@@ -21,7 +21,7 @@ At a high level, it works like this;
      because it was verified to be untampered with by `/token/verify/`);
    3. Take the user_id and check for a local user object;
       1. If exists, instatiates and use.
-      2. If not exists, requests `auth-service/auth/users/{user-id-from-jwt}/`
+      2. If not exists, requests `auth-service/auth/user/`
          1. Creates a local user object from that one returned. (Details should be 
          updated when authing the first time.)
          2. Instatiates and uses.
@@ -197,7 +197,7 @@ Then follow the example requests below.
 
 `curl \
   -H "Authorization: Bearer ${ACCESS_TOKEN}" \
-  http://localhost:8001/auth/users/{user_id}/`
+  http://localhost:8001/auth/user/`
 
 
 

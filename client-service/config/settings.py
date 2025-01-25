@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "remotejwt_client",
     "remotejwt_user",
-    "custom",
+    "userdata",
 ]
 
 MIDDLEWARE = [
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
-        "custom.permissions.CustomAccessPermission",
+        "userdata.permissions.AccessGroupPermission",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "remotejwt_client.authentication.RemoteJWTAuthentication",  # Use remote JWT service
@@ -122,10 +122,10 @@ REMOTE_JWT = {
     "REMOTE_AUTH_SERVICE_TOKEN_PATH": "/auth/token/",  # The path to login and retrieve a token
     "REMOTE_AUTH_SERVICE_REFRESH_PATH": "/auth/token/refresh/",  # The path to refresh a token
     "REMOTE_AUTH_SERVICE_VERIFY_PATH": "/auth/token/verify/",  # The path to verify a token
-    "REMOTE_AUTH_SERVICE_USER_PATH": "/auth/users/{user_id}/",  # the path to get the user object from the remote auth service
+    "REMOTE_AUTH_SERVICE_USER_PATH": "/auth/user/",  # the path to get the user object from the remote auth service
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
-    "USER_MODEL_SERIALIZER": "custom.serializers.CustomUserModelSerializer",
+    "USER_MODEL_SERIALIZER": "userdata.serializers.TokenUserSerializer",
 }
 
 # implement out or custom backend for Admin and other views.

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "remotejwt_auth",
     "remotejwt_user",
-    "custom",
+    "userdata",
 ]
 
 MIDDLEWARE = [
@@ -131,7 +131,6 @@ REMOTE_JWT = {
     "JWK_URL": None,
     "LEEWAY": 0,
     "AUTH_HEADER_TYPES": ("Bearer",),
-    # 'AUTH_HEADER_NAME': 'Jwt-Authorization', # don't uncomment, it breaks the authentication with the backend.
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
     "USER_AUTHENTICATION_RULE": "remotejwt_auth.authentication.default_user_authentication_rule",
@@ -142,8 +141,8 @@ REMOTE_JWT = {
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
-    "TOKEN_OBTAIN_SERIALIZER": "custom.serializers.CustomTokenObtainPairSerializer",
-    "USER_MODEL_SERIALIZER": "custom.serializers.CustomUserModelSerializer",
+    # "TOKEN_OBTAIN_SERIALIZER": "userdata.serializers.TokenUserSerializer",
+    "USER_MODEL_SERIALIZER": "userdata.serializers.TokenUserSerializer",
 }
 
 
