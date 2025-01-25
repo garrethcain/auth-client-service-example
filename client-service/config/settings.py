@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "remotejwt_client",
-    "remotejwt_user",
+    "easyjwt_client",
+    "easyjwt_user",
     "userdata",
 ]
 
@@ -84,7 +84,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "remotejwt_user.User"
+AUTH_USER_MODEL = "easyjwt_user.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -110,12 +110,12 @@ REST_FRAMEWORK = {
         "userdata.permissions.AccessGroupPermission",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "remotejwt_client.authentication.RemoteJWTAuthentication",  # Use remote JWT service
+        "easyjwt_client.authentication.EasyJWTAuthentication",  # Use easy JWT service
         "rest_framework.authentication.SessionAuthentication",  # Maybe they logged in with a session. Allows a view to work in a browser.
     ),
 }
 
-REMOTE_JWT = {
+EASY_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
     "AUTH_HEADER_NAME": "Authorization",  # I think this config is broken in this ver of the Simple-JWT lib.
     "REMOTE_AUTH_SERVICE_URL": "http://127.0.0.1:8001",  # Were do we reach the Auth-Service
@@ -131,7 +131,7 @@ REMOTE_JWT = {
 # implement out or custom backend for Admin and other views.
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",  # Default, check the local DB.
-    "remotejwt_client.authentication.ModelBackend",
+    "easyjwt_client.authentication.ModelBackend",
 ]
 
 

@@ -7,7 +7,7 @@ User = get_user_model()
 
 class AccessGroup(models.Model):
     """
-    An example model adding some additional fields to the RemoteJWT_User model via relationship.
+    An example model adding some additional fields to the EasyJWT_User model via relationship.
 
     A contrived example of extra user data, add any extra fields required.
     """

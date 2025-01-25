@@ -24,8 +24,8 @@ urlpatterns = [
         "auth/",
         include(
             [
-                path("", include("remotejwt_auth.urls")),
-                path("", include("remotejwt_user.urls")),
+                path("", include("easyjwt_auth.urls")),
+                path("", include("easyjwt_user.urls")),
             ]
         ),
     ),

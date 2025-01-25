@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    "remotejwt_auth",
-    "remotejwt_user",
+    "easyjwt_auth",
+    "easyjwt_user",
     "userdata",
 ]
 
@@ -87,8 +87,7 @@ DATABASES = {
 }
 
 
-# AUTH_USER_MODEL = "custom_user.User"
-AUTH_USER_MODEL = "remotejwt_user.User"
+AUTH_USER_MODEL = "easyjwt_user.User"
 
 
 # Password validation
@@ -113,11 +112,11 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
-        "remotejwt_auth.authentication.JWTAuthentication",
+        "easyjwt_auth.authentication.JWTAuthentication",
     ),
 }
 
-REMOTE_JWT = {
+EASY_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
@@ -133,15 +132,14 @@ REMOTE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
-    "USER_AUTHENTICATION_RULE": "remotejwt_auth.authentication.default_user_authentication_rule",
-    "AUTH_TOKEN_CLASSES": ("remotejwt_auth.tokens.AccessToken",),
+    "USER_AUTHENTICATION_RULE": "easyjwt_auth.authentication.default_user_authentication_rule",
+    "AUTH_TOKEN_CLASSES": ("easyjwt_auth.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
-    "TOKEN_USER_CLASS": "remotejwt_user.models.TokenUser",
+    "TOKEN_USER_CLASS": "easyjwt_user.models.TokenUser",
     "JTI_CLAIM": "jti",
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
-    # "TOKEN_OBTAIN_SERIALIZER": "userdata.serializers.TokenUserSerializer",
     "USER_MODEL_SERIALIZER": "userdata.serializers.TokenUserSerializer",
 }
 
