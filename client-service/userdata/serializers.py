@@ -44,23 +44,22 @@ class TokenUserSerializer(serializers.ModelSerializer):
         if not created:
             user.delete()  # remove to avoid integrity errors.
             raise exceptions.ParseError(
-                "Integrity error, failed to parse the received payload through the serializer."
+                "Integrity error, failed to parse the received payload through the serializer. "
+                "Maybe data from a relationship is missing."
             )
         serializer.save(user=user)
         return user
 
     def update(self, instance, validated_data):
         accessgroup = validated_data.pop("accessgroup")
-        serializer = (
-            AccessGroupSerializer(  # use instance to retrieve the existing model.
-                data=accessgroup, instance=instance.accessgroup
-            )
+        # Confirm the relatioship exists.
+        existing_accessgroup = (
+            instance.accessgroup if hasattr(instance, "accessgroup") else None
         )
-        created = serializer.is_valid(raise_exception=False)
-        if not created:
-            raise exceptions.ParseError(
-                "Integrity error, failed to parse the received payload through the serializer."
-            )
+        serializer = AccessGroupSerializer(
+            data=accessgroup, instance=existing_accessgroup
+        )
+        serializer.is_valid(raise_exception=True)
         serializer.save(user=instance)
 
         instance.first_name = validated_data["first_name"]

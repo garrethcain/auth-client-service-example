@@ -204,8 +204,5 @@ Then follow the example requests below.
 ## TODO:
 
 1. Create signup, password reset etc endpoints.
-2. Improve exception handling.
-3. Login logic in client-service.
-4. Provide a way for an admin to add a user into a service before the user logs 
+2. Provide a way for an admin to add a user into a service before the user logs 
   in.
-5. Clean up exception words.
